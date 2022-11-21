@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:05:49 by phudyka           #+#    #+#             */
-/*   Updated: 2022/11/18 17:06:46 by phudyka          ###   ########.fr       */
+/*   Updated: 2022/11/21 15:22:16 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_stack
 }				t_stack;
 
 void	ft_error(char *msg);
+void	ft_exit(char *msg, t_stack *stack_a, t_stack *stack_b);
 int		ft_input(char **argv);
 int		check_dup(char **argv);
 int		check_arg(char *argv);
@@ -42,7 +43,7 @@ t_stack *ft_new_stack(int val);
 t_stack	*end(t_stack *stack);
 t_stack	*before_end(t_stack *stack);
 void    ft_index(t_stack *stack_a, int argc);
-void	push_swap(t_stack **stack_a, t_stack **stack_b, int size);
+void	push_swap(t_stack *stack_a, t_stack *stack_b, int size);
 void	swap(t_stack *stack);
 void    minisort(t_stack **stack_a);
 void	rotate(t_stack **stack);
