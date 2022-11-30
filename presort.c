@@ -1,41 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   end.c                                              :+:      :+:    :+:   */
+/*   presort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 15:22:50 by phudyka           #+#    #+#             */
-/*   Updated: 2022/11/28 17:18:37 by phudyka          ###   ########.fr       */
+/*   Created: 2022/11/29 11:07:01 by phudyka           #+#    #+#             */
+/*   Updated: 2022/11/29 11:13:36 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_error(char *msg)
+void	presort(t_stack **stack_a, t_stack **stack_b)
 {
-	ft_putstr_fd(msg, STDERR_FILENO);
-	return(EXIT_FAILURE);	
-}
-
-void	ft_exit(char *msg, t_stack *stack_a, t_stack *stack_b)
-{
-	ft_putstr_fd(msg, STDERR_FILENO);
-	ft_free(&stack_a);
-	ft_free(&stack_b);
-}
-
-void	ft_free(t_stack **stack)
-{
-	t_stack	*temp;
+	int	i;
+	int	j;
+	int	size;
 	
-	if (!stack || !*stack)
-		return;
-	while(*stack)
+	size = ft_stack_size(*stack_a);
+	j = size;
+	while (j && size > 5)
 	{
-		temp = (*stack)->next;
-		free((*stack));
-		*stack = temp;
+		if ((*stack_a)->index > size / 2)
+			pb(stack_a, stack_b);
+		else
+			ra(stack_a);
+		j--;
 	}
-	*stack = NULL;
+	i = 0;
+	size = ft_stack_size(*stack_a);
+	if (size <= 3)
+		return;
+	while (i < (size - 3))
+	{
+		pb(stack_a, stack_b);
+		i++;
+	}
 }

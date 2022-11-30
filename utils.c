@@ -1,41 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   end.c                                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 15:22:50 by phudyka           #+#    #+#             */
-/*   Updated: 2022/11/28 17:18:37 by phudyka          ###   ########.fr       */
+/*   Created: 2022/11/24 17:17:44 by phudyka           #+#    #+#             */
+/*   Updated: 2022/11/24 17:19:15 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_error(char *msg)
+int	ft_nbr(char c)
 {
-	ft_putstr_fd(msg, STDERR_FILENO);
-	return(EXIT_FAILURE);	
+	return(c >= '0' && c <= '9');
 }
 
-void	ft_exit(char *msg, t_stack *stack_a, t_stack *stack_b)
+int ft_sign(char c)
 {
-	ft_putstr_fd(msg, STDERR_FILENO);
-	ft_free(&stack_a);
-	ft_free(&stack_b);
-}
-
-void	ft_free(t_stack **stack)
-{
-	t_stack	*temp;
-	
-	if (!stack || !*stack)
-		return;
-	while(*stack)
-	{
-		temp = (*stack)->next;
-		free((*stack));
-		*stack = temp;
-	}
-	*stack = NULL;
+	return(c == '+' || c == '-');
 }

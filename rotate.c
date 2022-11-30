@@ -1,41 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   end.c                                              :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 15:22:50 by phudyka           #+#    #+#             */
-/*   Updated: 2022/11/28 17:18:37 by phudyka          ###   ########.fr       */
+/*   Created: 2022/11/22 16:47:14 by phudyka           #+#    #+#             */
+/*   Updated: 2022/11/28 16:05:06 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_error(char *msg)
-{
-	ft_putstr_fd(msg, STDERR_FILENO);
-	return(EXIT_FAILURE);	
-}
-
-void	ft_exit(char *msg, t_stack *stack_a, t_stack *stack_b)
-{
-	ft_putstr_fd(msg, STDERR_FILENO);
-	ft_free(&stack_a);
-	ft_free(&stack_b);
-}
-
-void	ft_free(t_stack **stack)
+static void	rotate(t_stack **stack)
 {
 	t_stack	*temp;
-	
-	if (!stack || !*stack)
+
+	if (stack == NULL || *stack == NULL)
 		return;
-	while(*stack)
-	{
-		temp = (*stack)->next;
-		free((*stack));
-		*stack = temp;
-	}
-	*stack = NULL;
+	temp = *stack;
+	*stack = (*stack)->next;
+	temp->next = NULL;
+	ft_add_end(stack, temp);
+}
+
+void	ra(t_stack **stack_a)
+{
+	rotate(stack_a);
+	ft_putstr_fd("ra\n", 1);
+}
+void	rb(t_stack **stack_b)
+{
+	rotate(stack_b);
+	ft_putstr_fd("rb\n", 1);
+}
+
+void	rr(t_stack **stack_a, t_stack **stack_b)
+{
+	rotate(stack_a);
+	rotate(stack_b);
+	ft_putstr_fd("rr\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:38:36 by phudyka           #+#    #+#             */
-/*   Updated: 2022/11/21 15:28:22 by phudyka          ###   ########.fr       */
+/*   Updated: 2022/11/30 15:48:34 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,63 @@ t_stack	*ft_fill_stack(int argc, char **argv)
 	{
 		nbr = ft_atoi(argv[i]);
 		if (nbr > INT_MAX || nbr < INT_MIN)
-			ft_exit("Error!: OUT OF INT RANGE", &stack_a, NULL);
+		{
+			ft_free(&stack_a);
+			ft_error("Error! INPUT OUT OF INT RANGE");
+		}
 		if (i == 1)
-			stack_a = ft_new_stack((int)nbr);
+			stack_a = ft_init_stack((int)nbr);
 		else
-			ft_add_end(&stack_a, ft_new_stack((int)nbr));
+			ft_add_end(&stack_a, ft_init_stack((int)nbr));
 		i++;
 	}
-	return (stack_a);
+	return(stack_a);
 }
 
-void	push_swap(t_stack *stack_a, t_stack *stack_b, int size)
+t_stack *ft_init_stack(int val)
 {
-	if (size == 2 && !ft_sorted(stack_a))
-		ra(stack_a);
-	else if (size == 3 && !ft_sorted(stack_a))
+	t_stack	*stack;
+	
+	stack = malloc(sizeof(*stack));
+	if (!stack)
+		return(NULL);
+	stack->value = val;
+	stack->costa = -1;
+	stack->cosby = -1;
+	stack->index = 0;
+	stack->pos = 0;
+	stack->target = 0;
+	stack->next = NULL;
+	return(stack);
+}
+
+void	ft_index(t_stack *stack_a, int size)
+{
+	unsigned int	flag;
+	t_stack			*temp;
+	
+	temp = stack_a;
+	while(stack_a)
+	{
+		flag = 0;
+		while (stack_a)
+		{
+			if (temp->value > stack_a->value)
+				flag++;
+			temp = temp->next;
+		}
+		stack_a->index = size - flag;
+		stack_a = stack_a->next;
+	}
+}
+
+void	push_swap(t_stack **stack_a, t_stack **stack_b, int size)
+{
+	if (size == 2 && !ft_sorted(*stack_a))
+		sa(stack_a);
+	else if (size == 3)
 		minisort(stack_a);
-	if (size > 3 && !ft_sorted(stack_a))
+	else if (size > 3 && !ft_sorted(*stack_a))
 		maxisort(stack_a, stack_b);
 }
 
@@ -52,13 +92,16 @@ int main(int argc, char **argv)
 	t_stack	*stack_b;
 	
 	if (argc < 2)
-		ft_error("Error! BAD ARGUMENTS");
+		ft_error("Error! BAD ARGUMENTS.");
+	if (!check_arg(argv))
+		ft_error("Error! BAD ARGUMENTS.");
 	if (ft_sorted(stack_a))
 		return(EXIT_SUCCESS);
 	stack_b = NULL;
 	stack_a = ft_fill_stack(argc, argv);
 	size = ft_stack_size(stack_a);
-	push_swap(stack_a, stack_b, size);
-	ft_free(stack_a);
-	ft_free(stack_b);
+	ft_index(stack_a, size + 1);
+	push_swap(&stack_a, &stack_b, size);
+	ft_free(&stack_a);
+	ft_free(&stack_b);
 }
