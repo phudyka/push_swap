@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:05:49 by phudyka           #+#    #+#             */
-/*   Updated: 2022/11/28 17:17:45 by phudyka          ###   ########.fr       */
+/*   Updated: 2022/12/01 11:34:47 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct s_stack
 	struct s_stack	*next;
 }				t_stack;
 
-int		ft_error(char *msg);
-void	ft_exit(char *msg, t_stack *stack_a, t_stack *stack_b);
+int		ft_error(void);
+void	ft_exit(t_stack *stack_a, t_stack *stack_b);
 int		check_arg(char **argv);
 int		ft_nbr(char c);
 int		ft_sign(char c);

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:04:29 by phudyka           #+#    #+#             */
-/*   Updated: 2022/11/29 14:14:47 by phudyka          ###   ########.fr       */
+/*   Updated: 2022/12/01 11:48:51 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,13 +121,13 @@ void	maxisort(t_stack **stack_a, t_stack **stack_b)
 {
 	presort(stack_a, stack_b);
 	minisort(stack_a);
-	while (!ft_sorted(*stack_a))
+	while (*stack_b)
 	{
 		pos(*stack_a);
 		target(*stack_a, *stack_b);
 		cost(*stack_a, *stack_b);
-		pa(stack_b, stack_a);
 		lowcost(stack_a, stack_b);
+		pa(stack_b, stack_a);
 		if (!(*stack_b))
 			ft_done(stack_a);
 	}
