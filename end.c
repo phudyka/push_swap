@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 15:22:50 by phudyka           #+#    #+#             */
-/*   Updated: 2022/12/01 11:57:49 by phudyka          ###   ########.fr       */
+/*   Updated: 2022/12/02 10:42:38 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_error(void)
 {
 	ft_putstr_fd("Error\n", 2);
-	exit(1);	
+	exit(EXIT_FAILURE);
 }
 
 void	ft_exit(t_stack *stack_a, t_stack *stack_b)

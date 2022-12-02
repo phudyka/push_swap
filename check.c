@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:24:03 by phudyka           #+#    #+#             */
-/*   Updated: 2022/11/24 17:30:33 by phudyka          ###   ########.fr       */
+/*   Updated: 2022/12/02 10:50:39 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static int	ft_input(char *argv)
 		i++;
 	while (argv[i] && ft_nbr(argv[i]))
 		i++;
-	if (argv[i] != '\0' && !ft_nbr(argv[i]))
-		return (0);
-	return (1);
+	if (argv[i] == '\0' && ft_nbr(argv[i]))
+		ft_error();
+	return (0);
 }
 
 static int ft_nbcmp(const char *nb1, const char *nb2)
@@ -62,7 +62,7 @@ static int	check_dup(char **argv)
 		while (argv[j])
 		{
 			if (j != 1 && ft_nbcmp(argv[i], argv[j]) == 0)
-				return (1);
+				return (1);n
 			j++;
 		}
 		i++;
