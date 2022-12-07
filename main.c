@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 17:38:36 by phudyka           #+#    #+#             */
-/*   Updated: 2022/12/02 10:45:51 by phudyka          ###   ########.fr       */
+/*   Updated: 2022/12/06 11:1 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,18 @@ t_stack	*ft_fill_stack(int argc, char **argv)
 	{
 		nbr = ft_atoi(argv[i]);
 		if (nbr > INT_MAX || nbr < INT_MIN)
-			ft_exit(stack_a, NULL);
+			ft_exit(&stack_a, NULL);
 		if (i == 1)
 			stack_a = ft_init_stack((int)nbr);
 		else
 			ft_add_end(&stack_a, ft_init_stack((int)nbr));
+		printstruct(stack_a);
 		i++;
 	}
 	return(stack_a);
 }
 
-t_stack *ft_init_stack(int val)
+t_stack *ft_init_stack(int val) // oui
 {
 	t_stack	*stack;
 	
@@ -49,26 +50,35 @@ t_stack *ft_init_stack(int val)
 	stack->pos = 0;
 	stack->target = 0;
 	stack->next = NULL;
-	return(stack);
+	return (stack);
 }
 
 void	ft_index(t_stack *stack_a, int size)
 {
-	unsigned int	flag;
-	t_stack			*temp;
+	t_stack	*max;
+	t_stack	*temp;
+	int		value;
 	
-	temp = stack_a;
-	while(stack_a)
+	while (--size > 0)
 	{
-		flag = 0;
-		while (stack_a)
+		max = NULL;
+		temp = stack_a;
+		value = INT_MIN;
+		while (temp)
 		{
-			if (temp->value > stack_a->value)
-				flag++;
-			temp = temp->next;
+			if (temp->value == INT_MIN && temp->index == 0)
+				temp->index = 1;
+			if (temp->value > value && temp->index == 0)
+			{
+				value = temp->value;
+				max = temp;
+				temp = stack_a;
+			}
+			else
+				temp = temp->next;
 		}
-		stack_a->index = size - flag;
-		stack_a = stack_a->next;
+		if (max != NULL)
+			max->index = size;
 	}
 }
 
@@ -89,9 +99,9 @@ int main(int argc, char **argv)
 	t_stack	*stack_b;
 	
 	if (argc < 2)
-		ft_error();
-	if (!check_arg(argv))
-		ft_error();
+		return (0);
+	if (check_arg(argv) == 1)
+		ft_exit(NULL, NULL);
 	stack_b = NULL;
 	stack_a = ft_fill_stack(argc, argv);
 	size = ft_stack_size(stack_a);

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:18 by phudyka           #+#    #+#             */
-/*   Updated: 2022/11/28 15:15:01 by phudyka          ###   ########.fr       */
+/*   Updated: 2022/12/05 16:06:18 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,15 @@
 static void	reverse(t_stack **stack)
 {
 	t_stack	*temp;
+	t_stack	*last;
+	t_stack	*prev;
 
-	if (stack == NULL || *stack == NULL)
-		return;
+	last = end(*stack);
+	prev = before_end(*stack);
 	temp = *stack;
-	if (temp->next == NULL)
-		return;
-	while (temp->next->next != NULL)
-		temp = temp->next;
-	ft_add_start(stack, temp->next);
-	temp->next = NULL;
+	*stack = last;
+	(*stack)->next = temp;
+	prev->next = NULL;
 }
 
 void	rra(t_stack **stack_a)

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:24:03 by phudyka           #+#    #+#             */
-/*   Updated: 2022/12/02 10:50:39 by phudyka          ###   ########.fr       */
+/*   Updated: 2022/12/05 11:15:20 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	check_dup(char **argv)
 		while (argv[j])
 		{
 			if (j != 1 && ft_nbcmp(argv[i], argv[j]) == 0)
-				return (1);n
+				return (1);
 			j++;
 		}
 		i++;

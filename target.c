@@ -6,46 +6,54 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 10:41:51 by phudyka           #+#    #+#             */
-/*   Updated: 2022/11/28 10:52:17 by phudyka          ###   ########.fr       */
+/*   Updated: 2022/12/05 12:09:14 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	target(t_stack *stack_a, t_stack *stack_b)
+static int	get_target(t_stack **stack_a, int b, int target, int pos)
 {
-	int	max;
-	int	diff;
-	t_stack			*tempa;
+	t_stack *tempa;
 	
-	max  = 0;
-	tempa = stack_a;
-	while (stack_b)
+	tempa = *stack_a;
+	while (tempa)
 	{
-		stack_a = tempa;
-		diff = UINT_MAX;
-		while (stack_a)
+		if (tempa->index > b && tempa->index < target)
 		{
-			if (stack_a->index > max)
-				max = stack_a->index;
-			if (diff > stack_a->index - stack_b->index && stack_a->index > stack_b->index)
-				{
-					diff = stack_a->index - stack_b->index;
-					stack_b->target = stack_a->pos;
-				}
-			stack_a = stack_a->next;
+			target = tempa->index;
+			pos = tempa->pos;
 		}
+		tempa = tempa->next;
 	}
-	if (stack_b->index > max)
+	if (target != INT_MAX)
+		return(pos);
+	tempa = *stack_a;
+	while (tempa)
 	{
-		while (stack_a)
+		if (tempa->index < target)
 		{
-			if (stack_a->index < max)
-			{
-				max = stack_a->index;
-				stack_b->target = stack_a->pos;
-			}
-			stack_a = stack_a->next;
+			target = tempa->index;
+			pos = tempa->pos;
 		}
+		tempa = tempa->next;
+	}
+	return(pos);
+}
+
+void	target(t_stack **stack_a, t_stack **stack_b)
+{
+	int		targ;
+	t_stack *tempb;
+	
+	tempb = *stack_b;
+	pos(*stack_a);
+	pos(*stack_b);
+	targ = 0;
+	while (tempb)
+	{
+		targ = get_target(stack_a, tempb->index, INT_MAX, targ);
+		tempb->target = targ;
+		tempb = tempb->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:04:08 by phudyka           #+#    #+#             */
-/*   Updated: 2022/12/01 11:57:18 by phudyka          ###   ########.fr       */
+/*   Updated: 2022/12/07 11:43:33 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	ft_sorted(t_stack *stack)
 
 void    pos(t_stack *stack)
 {
-	unsigned int	i;
-	unsigned int	size;
+	int	i;
+	int	size;
 	
 	i = 0;
-	size = (unsigned int)ft_stack_size(stack);
+	size = ft_stack_size(stack);
 	while (i < size)
 	{
 		stack->pos = i;
@@ -40,7 +40,7 @@ void    pos(t_stack *stack)
 
 static int ft_max(t_stack *stack_a)
 {
-	int max;
+	int	max;
 	
 	max = stack_a->index;
 	while (stack_a)

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:47:14 by phudyka           #+#    #+#             */
-/*   Updated: 2022/11/28 16:05:06 by phudyka          ###   ########.fr       */
+/*   Updated: 2022/12/05 16:03:33 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static void	rotate(t_stack **stack)
 {
 	t_stack	*temp;
+	t_stack	*last;
 
-	if (stack == NULL || *stack == NULL)
-		return;
 	temp = *stack;
 	*stack = (*stack)->next;
+	last = end(*stack);
 	temp->next = NULL;
-	ft_add_end(stack, temp);
+	last->next = temp;
 }
 
 void	ra(t_stack **stack_a)
