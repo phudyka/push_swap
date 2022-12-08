@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   presort.c                                          :+:      :+:    :+:   */
+/*   index.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 11:07:01 by phudyka           #+#    #+#             */
-/*   Updated: 2022/12/08 15:18:39 by phudyka          ###   ########.fr       */
+/*   Created: 2022/12/08 15:35:30 by phudyka           #+#    #+#             */
+/*   Updated: 2022/12/08 16:18:07 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	presort(t_stack **stack_a, t_stack **stack_b)
+int	lowest(t_stack **stack_a)
 {
-	int	i;
-	int	j;
-	int	size;
+	int		index;
+	int		position;
+	t_stack *temp;
 	
-	size = ft_stack_size(*stack_a);
-	j = size;
-	while (j && size > 5)
+	pos(*stack_a);
+	temp = *stack_a;
+	position = temp->pos;
+	while(temp)
 	{
-		if ((*stack_a)->index > size / 2)
-			pb(stack_a, stack_b);
-		else
-			ra(stack_a);
-		j--;
+		if (temp->index < index)
+		{
+			index = temp->index;
+			position = temp->pos;
+		}
+		temp = temp->next;
 	}
-	i = 0;
-	size = ft_stack_size(*stack_a);
-	if (size <= 3)
-		return;
-	while (size - i > 3)
-	{
-		pb(stack_a, stack_b);
-		i++;
-	}
+	return (position);
 }

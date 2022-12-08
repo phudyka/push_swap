@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:22:35 by phudyka           #+#    #+#             */
-/*   Updated: 2022/12/07 11:41:32 by phudyka          ###   ########.fr       */
+/*   Updated: 2022/12/08 10:32:02 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,15 @@ void	printstruct(t_stack *stack)
 	ft_putchar_fd('\n', 2);
 	ft_putnbr_fd(stack->pos, 2);
 	ft_putchar_fd('\n', 2);
-	while (stack)
+	ft_putnbr_fd(stack->value, 2);
+	ft_putchar_fd('\n', 2);
+	/*while (stack)
 	{
 		ft_putnbr_fd(stack->value, 2);
-	ft_putchar_fd('\n', 2);
+		ft_putchar_fd('\n', 2);
 		stack = stack->next;
+		if (stack == NULL)
+			ft_putstr_fd("void\n", 2);
 	}
+	ft_putchar_fd('\n', 2);*/
 }

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 11:24:03 by phudyka           #+#    #+#             */
-/*   Updated: 2022/12/05 11:15:20 by phudyka          ###   ########.fr       */
+/*   Updated: 2022/12/08 11:57:55 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static int	ft_input(char *argv)
 		i++;
 	while (argv[i] && ft_nbr(argv[i]))
 		i++;
-	if (argv[i] == '\0' && ft_nbr(argv[i]))
-		ft_error();
-	return (0);
+	if (argv[i] != '\0' && !ft_nbr(argv[i]))
+		return(0);
+	return (1);
 }
 
 static int ft_nbcmp(const char *nb1, const char *nb2)
@@ -43,7 +43,7 @@ static int ft_nbcmp(const char *nb1, const char *nb2)
 		if(nb2[j] == '+')
 			j++;
 	}
-	while (nb1[i] && nb2[j] && nb1[i] == nb2[j])
+	while (nb1[i] != '\0' && nb2[j] != '\0' && nb1[i] == nb2[j])
 	{
 		i++;
 		j++;
@@ -55,6 +55,7 @@ static int	check_dup(char **argv)
 {
 	int	i;
 	int	j;
+	
 	i = 1;
 	while (argv[i])
 	{
@@ -93,7 +94,7 @@ int		check_arg(char **argv)
 	z = 0;
 	while (argv[i])
 	{
-		if (!ft_input(argv[i]))
+		if (ft_input(argv[i]) == 1)
 			return(0);
 		z += zero(argv[i]);
 		i++;

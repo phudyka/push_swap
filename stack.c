@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:41:27 by phudyka           #+#    #+#             */
-/*   Updated: 2022/11/29 11:00:49 by phudyka          ###   ########.fr       */
+/*   Updated: 2022/12/07 11:59:55 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ void	ft_add_start(t_stack **stack, t_stack *new)
 void	ft_add_end(t_stack **stack, t_stack *new)
 {
 	t_stack	*last;
-	
+
+	if (!new)
+		return;	
 	if (!*stack)
 	{
 		*stack = new;
