@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+         #
+#    By: phudyka <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 11:36:19 by phudyka           #+#    #+#              #
-#    Updated: 2022/11/24 18:00:48 by phudyka          ###   ########.fr        #
+#    Updated: 2022/04/20 17:32:27 by phudyka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS		=	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c	\
 			ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c			\
 			ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c				\
 			ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c			\
-			ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_absol.c			\
+			ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c			\
 
 B_SRCS		=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c 			\
 			ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c 				\

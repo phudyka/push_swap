@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 16:47:17 by phudyka           #+#    #+#             */
-/*   Updated: 2022/12/06 11:11:16 by phudyka          ###   ########.fr       */
+/*   Created: 2022/12/12 15:44:45 by phudyka           #+#    #+#             */
+/*   Updated: 2022/12/12 15:46:13 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,33 @@
 
 static void	swap(t_stack *stack)
 {
-	int	temp;
+	int	tmp;
 
-	if (!stack || !stack->next)
-		return;
-	temp = stack->value;
+	if (stack == NULL || stack->next == NULL)
+		return ;
+	tmp = stack->value;
 	stack->value = stack->next->value;
-	stack->next->value = temp;
-	temp = stack->index;
+	stack->next->value = tmp;
+	tmp = stack->index;
 	stack->index = stack->next->index;
-	stack->next->index = temp;
+	stack->next->index = tmp;
 }
 
 void	sa(t_stack **stack_a)
 {
 	swap(*stack_a);
-	ft_putstr_fd("sa\n", 1);
+	ft_putstr("sa\n");
 }
 
 void	sb(t_stack **stack_b)
 {
 	swap(*stack_b);
-	ft_putstr_fd("sb\n", 1);
+	ft_putstr("sb\n");
 }
 
 void	ss(t_stack **stack_a, t_stack **stack_b)
 {
 	swap(*stack_a);
 	swap(*stack_b);
-	ft_putstr_fd("ss\n", 1);
+	ft_putstr("ss\n");
 }

@@ -5,19 +5,50 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 17:17:44 by phudyka           #+#    #+#             */
-/*   Updated: 2022/11/24 17:19:15 by phudyka          ###   ########.fr       */
+/*   Created: 2022/12/12 15:44:49 by phudyka           #+#    #+#             */
+/*   Updated: 2022/12/12 15:46:35 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_nbr(char c)
+int	ft_nbr(char nb)
 {
-	return(c >= '0' && c <= '9');
+	return (nb >= '0' && nb <= '9');
 }
 
-int ft_sign(char c)
+int	ft_sign(char s)
 {
-	return(c == '+' || c == '-');
+	return (s == '+' || s == '-');
+}
+
+int	ft_abs(int nbr)
+{
+	if (nbr < 0)
+		return (nbr * -1);
+	return (nbr);
+}
+
+long	ft_atoi(const char *str)
+{
+	int		i;
+	long	nbr;
+	int		neg;
+
+	nbr = 0;
+	neg = 1;
+	i = 0;
+	if (str[i] == '+')
+		i++;
+	else if (str[i] == '-')
+	{
+		neg *= -1;
+		i++;
+	}
+	while (ft_nbr(str[i]))
+	{
+		nbr = (nbr * 10) + (str[i] - '0');
+		i++;
+	}
+	return (nbr * neg);
 }

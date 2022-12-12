@@ -5,64 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 11:24:03 by phudyka           #+#    #+#             */
-/*   Updated: 2022/12/08 11:57:55 by phudyka          ###   ########.fr       */
+/*   Created: 2022/12/12 15:42:48 by phudyka           #+#    #+#             */
+/*   Updated: 2022/12/12 15:43:07 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	ft_input(char *argv)
+static int	ft_input(char *av)
 {
 	int	i;
 
 	i = 0;
-	if (ft_sign(argv[i]) && argv[i + 1] != '\0')
+	if (ft_sign(av[i]) && av[i + 1] != '\0')
 		i++;
-	while (argv[i] && ft_nbr(argv[i]))
+	while (av[i] && ft_nbr(av[i]))
 		i++;
-	if (argv[i] != '\0' && !ft_nbr(argv[i]))
-		return(0);
+	if (av[i] != '\0' && !ft_nbr(av[i]))
+		return (0);
 	return (1);
 }
 
-static int ft_nbcmp(const char *nb1, const char *nb2)
+static int	nb_cmp(const char *s1, const char *s2)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	j = i;
-	if (nb1[i] == '+')
+	if (s1[i] == '+')
 	{
-		if (nb2[j] != '+')
+		if (s2[j] != '+')
 			i++;
 	}
 	else
 	{
-		if(nb2[j] == '+')
+		if (s2[j] == '+')
 			j++;
 	}
-	while (nb1[i] != '\0' && nb2[j] != '\0' && nb1[i] == nb2[j])
+	while (s1[i] != '\0' && s2[j] != '\0' && s1[i] == s2[j])
 	{
 		i++;
 		j++;
 	}
-	return ((unsigned char)nb1[i] - (unsigned char)nb2[j]);
+	return ((unsigned char)s1[i] - (unsigned char)s2[j]);
 }
 
-static int	check_dup(char **argv)
+static int	check_dup(char **av)
 {
 	int	i;
 	int	j;
-	
+
 	i = 1;
-	while (argv[i])
+	while (av[i])
 	{
 		j = 1;
-		while (argv[j])
+		while (av[j])
 		{
-			if (j != 1 && ft_nbcmp(argv[i], argv[j]) == 0)
+			if (j != i && nb_cmp(av[i], av[j]) == 0)
 				return (1);
 			j++;
 		}
@@ -71,37 +71,37 @@ static int	check_dup(char **argv)
 	return (0);
 }
 
-static int zero(char *argv)
+static int	ft_zero(char *av)
 {
 	int	i;
 
 	i = 0;
-	if (ft_sign(argv[i]))
+	if (ft_sign(av[i]))
 		i++;
-	while (argv[i] && argv[i] == '0')
+	while (av[i] && av[i] == '0')
 		i++;
-	if (argv[i] != '\0')
-		return(0);
-	return(1);
+	if (av[i] != '\0')
+		return (0);
+	return (1);
 }
 
-int		check_arg(char **argv)
+int	check_input(char **argv)
 {
 	int	i;
-	int z;
-	
-	i = 1;
+	int	z;
+
 	z = 0;
+	i = 1;
 	while (argv[i])
 	{
-		if (ft_input(argv[i]) == 1)
-			return(0);
-		z += zero(argv[i]);
+		if (!ft_input(argv[i]))
+			return (0);
+		z += ft_zero(argv[i]);
 		i++;
 	}
 	if (z > 1)
-		return(0);
+		return (0);
 	if (check_dup(argv))
-		return(0);
-	return(1);
+		return (0);
+	return (1);
 }

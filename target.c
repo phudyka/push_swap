@@ -5,55 +5,57 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 10:41:51 by phudyka           #+#    #+#             */
-/*   Updated: 2022/12/05 12:09:14 by phudyka          ###   ########.fr       */
+/*   Created: 2022/12/12 15:44:47 by phudyka           #+#    #+#             */
+/*   Updated: 2022/12/12 15:46:22 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "push_swap.h"
 
-static int	get_target(t_stack **stack_a, int b, int target, int pos)
+static int	get_target(t_stack **a, int b_idx,
+								int target_idx, int target_pos)
 {
-	t_stack *tempa;
-	
-	tempa = *stack_a;
-	while (tempa)
+	t_stack	*tmp_a;
+
+	tmp_a = *a;
+	while (tmp_a)
 	{
-		if (tempa->index > b && tempa->index < target)
+		if (tmp_a->index > b_idx && tmp_a->index < target_idx)
 		{
-			target = tempa->index;
-			pos = tempa->pos;
+			target_idx = tmp_a->index;
+			target_pos = tmp_a->pos;
 		}
-		tempa = tempa->next;
+		tmp_a = tmp_a->next;
 	}
-	if (target != INT_MAX)
-		return(pos);
-	tempa = *stack_a;
-	while (tempa)
+	if (target_idx != INT_MAX)
+		return (target_pos);
+	tmp_a = *a;
+	while (tmp_a)
 	{
-		if (tempa->index < target)
+		if (tmp_a->index < target_idx)
 		{
-			target = tempa->index;
-			pos = tempa->pos;
+			target_idx = tmp_a->index;
+			target_pos = tmp_a->pos;
 		}
-		tempa = tempa->next;
+		tmp_a = tmp_a->next;
 	}
-	return(pos);
+	return (target_pos);
 }
 
-void	target(t_stack **stack_a, t_stack **stack_b)
+void	target(t_stack **a, t_stack **b)
 {
-	int		targ;
-	t_stack *tempb;
-	
-	tempb = *stack_b;
-	pos(*stack_a);
-	pos(*stack_b);
-	targ = 0;
-	while (tempb)
+	t_stack	*tmp_b;
+	int		target_pos;
+
+	tmp_b = *b;
+	get_position(a);
+	get_position(b);
+	target_pos = 0;
+	while (tmp_b)
 	{
-		targ = get_target(stack_a, tempb->index, INT_MAX, targ);
-		tempb->target = targ;
-		tempb = tempb->next;
+		target_pos = get_target(a, tmp_b->index, INT_MAX, target_pos);
+		tmp_b->target = target_pos;
+		tmp_b = tmp_b->next;
 	}
 }

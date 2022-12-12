@@ -5,64 +5,38 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 15:04:08 by phudyka           #+#    #+#             */
-/*   Updated: 2022/12/07 11:43:33 by phudyka          ###   ########.fr       */
+/*   Created: 2022/12/12 15:44:10 by phudyka           #+#    #+#             */
+/*   Updated: 2022/12/12 15:44:33 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_sorted(t_stack *stack)
+static int	find_highest_index(t_stack *stack)
 {
-	while (stack->next != NULL)
+	int		index;
+
+	index = stack->index;
+	while (stack)
 	{
-		if (stack->value > stack->next->value)
-			return(0);
+		if (stack->index > index)
+			index = stack->index;
 		stack = stack->next;
 	}
-	return(1);
+	return (index);
 }
 
-void    pos(t_stack *stack)
+void	mini(t_stack **stack)
 {
-	int	i;
-	int	size;
-	
-	i = 0;
-	size = ft_stack_size(stack);
-	while (i < size)
-	{
-		stack->pos = i;
-		stack = stack->next;
-		i++;
-	}
-}
+	int		highest;
 
-static int ft_max(t_stack *stack_a)
-{
-	int	max;
-	
-	max = stack_a->index;
-	while (stack_a)
-	{
-		if (stack_a->index > max)
-			max = stack_a->index;
-		stack_a = stack_a->next;
-	}
-	return (max);
-}
-
-void	minisort(t_stack **stack_a)
-{
-	int	max;
-
-	if (ft_sorted(*stack_a))
-		return;
-	max = ft_max(*stack_a);
-	if ((*stack_a)->index == max)
-		ra(stack_a);
-	else if ((*stack_a)->next->index == max)
-		rra(stack_a);
-	if ((*stack_a)->index > (*stack_a)->next->index)
-		sa(stack_a);
+	if (ft_sorted(*stack))
+		return ;
+	highest = find_highest_index(*stack);
+	if ((*stack)->index == highest)
+		ra(stack);
+	else if ((*stack)->next->index == highest)
+		rra(stack);
+	if ((*stack)->index > (*stack)->next->index)
+		sa(stack);
 }

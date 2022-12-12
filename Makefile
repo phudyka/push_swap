@@ -5,15 +5,18 @@
 #                                                     +:+ +:+         +:+      #
 #    By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/03/30 11:36:19 by phudyka           #+#    #+#              #
-#    Updated: 2022/12/08 16:16:53 by phudyka          ###   ########.fr        #
+#    Created: 2022/12/12 12:01:27 by phudyka           #+#    #+#              #
+#    Updated: 2022/12/12 15:39:08 by phudyka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CC = gcc
 CFLAGS = -g -Wall -Werror -Wextra 
-SRC  =  printstruct.c main.c check.c utils.c stack.c mini.c maxi.c presort.c target.c index.c move.c reverse.c swap.c rotate.c push.c end.c
+SRC  =  main.c check.c utils.c target.c \
+		stack.c mini.c maxi.c cost.c 	\
+		pos.c move.c reverse.c swap.c 	\
+		 rotate.c push.c end.c			\
 
 OBJ = $(patsubst %.c,%.o,$(SRC))
 INCLUDES = push_swap.h

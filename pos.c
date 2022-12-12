@@ -1,37 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   pos.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/12 15:44:39 by phudyka           #+#    #+#             */
-/*   Updated: 2022/12/12 15:45:23 by phudyka          ###   ########.fr       */
+/*   Created: 2022/12/12 15:44:37 by phudyka           #+#    #+#             */
+/*   Updated: 2022/12/12 15:45:12 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	push(t_stack **src, t_stack **dest)
+void	get_position(t_stack **stack)
 {
 	t_stack	*tmp;
+	int		i;
 
-	if (*src == NULL)
-		return ;
-	tmp = (*src)->next;
-	(*src)->next = *dest;
-	*dest = *src;
-	*src = tmp;
+	tmp = *stack;
+	i = 0;
+	while (tmp)
+	{
+		tmp->pos = i;
+		tmp = tmp->next;
+		i++;
+	}
 }
 
-void	pa(t_stack **stack_a, t_stack **stack_b)
+int	low(t_stack **stack)
 {
-	push(stack_b, stack_a);
-	ft_putstr("pa\n");
-}
+	t_stack	*tmp;
+	int		lowest_index;
+	int		lowest_pos;
 
-void	pb(t_stack **stack_a, t_stack **stack_b)
-{
-	push(stack_a, stack_b);
-	ft_putstr("pb\n");
+	tmp = *stack;
+	lowest_index = INT_MAX;
+	get_position(stack);
+	lowest_pos = tmp->pos;
+	while (tmp)
+	{
+		if (tmp->index < lowest_index)
+		{
+			lowest_index = tmp->index;
+			lowest_pos = tmp->pos;
+		}
+		tmp = tmp->next;
+	}
+	return (lowest_pos);
 }

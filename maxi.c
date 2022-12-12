@@ -5,116 +5,69 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 15:04:29 by phudyka           #+#    #+#             */
-/*   Updated: 2022/12/08 17:56:28 by phudyka          ###   ########.fr       */
+/*   Created: 2022/12/12 15:44:05 by phudyka           #+#    #+#             */
+/*   Updated: 2022/12/12 15:44:07 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int		steps(long costa, long cosby) //
+static void	push_all_save_three(t_stack **stack_a, t_stack **stack_b)
 {
-	long	low;
-	
-	low = 0;
-	while (costa != 0 || cosby != 0)
+	int	size;
+	int	pushed;
+	int	i;
+
+	size = ft_stack_size(*stack_a);
+	pushed = 0;
+	i = 0;
+	while (size > 6 && i < size && pushed < size / 2)
 	{
-		if (costa > 0 && cosby > 0)
+		if ((*stack_a)->index <= size / 2)
 		{
-			low++;
-			costa--;
-			cosby--;
-		}
-		else if (costa < 0 && cosby < 0)
-		{
-			low++;
-			costa++;
-			cosby++;
+			pb(stack_a, stack_b);
+			pushed++;
 		}
 		else
-		{
-			low += (ft_absol(costa) + ft_absol(cosby));
-			costa = 0;
-			cosby = 0;
-		}
+			ra(stack_a);
+		i++;
 	}
-	return(low);
-}
-
-static void	cost(t_stack **stack_a, t_stack **stack_b)
-{
-	int		max_b;
-	int		max_a;
-	t_stack *tempa;
-	t_stack	*tempb;
-
-	tempa = *stack_a;
-	tempb = *stack_b;
-	max_b = ft_stack_size(tempb);
-	max_a = ft_stack_size(tempa);
-	while (tempb)
+	while (size - pushed > 3)
 	{
-		tempb->cosby = tempb->pos;
-		if (tempb->pos > max_b / 2)
-			tempb->cosby = (max_b - tempb->pos) * -1;
-		tempb->costa = tempb->target;
-		if (tempb->target > max_a / 2)
-			tempb->costa = (max_a - tempb->target) * -1;
-		tempb = tempb->next;
+		pb(stack_a, stack_b);
+		pushed++;
 	}
 }
 
-static void	lowcost(t_stack **stack_a, t_stack **stack_b)
+static void	shift_stack(t_stack **stack_a)
 {
-	int		low;
-	int		costa;
-	int		cosby;
-	t_stack *temp;
-	
-	low = INT_MAX;
-	temp = *stack_b;
-	while (temp)
-	{
-		if (steps(temp->costa, temp->cosby) < low)
-		{
-			low = steps(temp->costa, temp->cosby);
-			costa = temp->costa;
-			cosby = temp->cosby;
-		}
-		temp = temp->next;
-	}
-	master_rotation(stack_a, stack_b, costa, cosby);
-}
+	int	lowest_pos;
+	int	stack_size;
 
-static void	ft_done(t_stack **stack_a)
-{
-	int	low;
-	int	size;
-	
-	low = lowest(stack_a);
-	size = ft_stack_size(*stack_a);
-	if (low > size /2)
+	stack_size = ft_stack_size(*stack_a);
+	lowest_pos = low(stack_a);
+	if (lowest_pos > stack_size / 2)
 	{
-		while (low < size)
+		while (lowest_pos < stack_size)
 		{
 			rra(stack_a);
-			low++;
+			lowest_pos++;
 		}
 	}
 	else
 	{
-		while (low > 0)
+		while (lowest_pos > 0)
 		{
 			ra(stack_a);
-			low--;
+			lowest_pos--;
 		}
 	}
 }
 
-void	maxisort(t_stack **stack_a, t_stack **stack_b)
+void	maxi(t_stack **stack_a, t_stack **stack_b)
 {
-	presort(stack_a, stack_b);
-	minisort(stack_a);
+	push_all_save_three(stack_a, stack_b);
+	mini(stack_a);
 	while (*stack_b)
 	{
 		target(stack_a, stack_b);
@@ -122,5 +75,5 @@ void	maxisort(t_stack **stack_a, t_stack **stack_b)
 		lowcost(stack_a, stack_b);
 	}
 	if (!ft_sorted(*stack_a))
-		ft_done(stack_a);
+		shift_stack(stack_a);
 }

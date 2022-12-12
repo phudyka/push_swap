@@ -5,40 +5,57 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 15:22:50 by phudyka           #+#    #+#             */
-/*   Updated: 2022/12/06 11:37:18 by phudyka          ###   ########.fr       */
+/*   Created: 2022/12/12 15:43:39 by phudyka           #+#    #+#             */
+/*   Updated: 2022/12/12 15:43:41 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_error(void)
+void	ft_putstr(char *str)
 {
-	ft_putstr_fd("Error\n", 2);
-	exit(1);
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
 }
 
-void	ft_exit(t_stack **stack_a, t_stack **stack_b)
+int	ft_sorted(t_stack *stack)
 {
-	if (!stack_a || *stack_a)
-		ft_free(stack_a);
-	if (!stack_b || *stack_b)
-		ft_free(stack_b);
-	ft_putstr_fd("Error\n", 2);
-	exit(1);
+	while (stack->next != NULL)
+	{
+		if (stack->value > stack->next->value)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
 }
 
 void	ft_free(t_stack **stack)
 {
-	t_stack	*temp;
-	
-	if (!stack || !*stack)
-		return;
-	while(*stack)
+	t_stack	*tmp;
+
+	if (!stack || !(*stack))
+		return ;
+	while (*stack)
 	{
-		temp = (*stack)->next;
+		tmp = (*stack)->next;
 		free(*stack);
-		*stack = temp;
+		*stack = tmp;
 	}
 	*stack = NULL;
+}
+
+void	ft_exit(t_stack **stack_a, t_stack **stack_b)
+{
+	if (stack_a == NULL || *stack_a != NULL)
+		ft_free(stack_a);
+	if (stack_b == NULL || *stack_b != NULL)
+		ft_free(stack_b);
+	write(2, "Error\n", 6);
+	exit (1);
 }
